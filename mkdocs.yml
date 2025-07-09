@@ -1,0 +1,26 @@
+site_name: primalstep
+
+theme:
+  name: "material"
+  features:
+    - navigation.tabs
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
+
+plugins:
+  - search:
+      lang: en
+  - mkdocstrings # 自动搜索代码
+
+nav:
+  - Index: index.md

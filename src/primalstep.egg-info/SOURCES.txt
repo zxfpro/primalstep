@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/primalstep/__init__.py
+src/primalstep/core.py
+src/primalstep/log.py
+src/primalstep/server.py
+src/primalstep.egg-info/PKG-INFO
+src/primalstep.egg-info/SOURCES.txt
+src/primalstep.egg-info/dependency_links.txt
+src/primalstep.egg-info/requires.txt
+src/primalstep.egg-info/top_level.txt
+tests/test_main.py
