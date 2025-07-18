@@ -1,3 +1,4 @@
+# log.py
 import logging
 import os
 from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
@@ -78,51 +79,53 @@ class Logger:
         logger = logging.getLogger()
         logger.setLevel(self.LOG_LEVEL)
 
-        # 避免重复添加 Handler (如果多次调用 setup_logging)
-        if not logger.handlers:
-            # --- 4. 配置 Formatter (格式化器) ---
-            # 常见格式：时间 - 日志级别 - Logger名称 - 模块名 - 行号 - 消息
-            formatter = logging.Formatter(
-                '%(asctime)s - %(levelname)s - %(name)s - %(module)s:%(lineno)d - %(message)s'
-            )
+        # 清除所有现有 handlers，避免重复添加
+        for handler in logger.handlers[:]:
+            logger.removeHandler(handler)
 
-            # --- 5. 配置 Handler (处理器) ---
+        # --- 4. 配置 Formatter (格式化器) ---
+        # 常见格式：时间 - 日志级别 - Logger名称 - 模块名 - 行号 - 消息
+        formatter = logging.Formatter(
+            '%(asctime)s - %(levelname)s - %(name)s - %(module)s:%(lineno)d - %(message)s'
+        )
 
-            # 5.1 控制台处理器 (StreamHandler)
-            console_handler = logging.StreamHandler()
-            console_handler.setLevel(logging.INFO) # 控制台只显示 INFO 及以上级别的日志
-            console_handler.setFormatter(formatter)
-            logger.addHandler(console_handler)
+        # --- 5. 配置 Handler (处理器) ---
 
-            # 5.2 文件处理器 (RotatingFileHandler 或 TimedRotatingFileHandler)
+        # 5.1 控制台处理器 (StreamHandler)
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.INFO) # 控制台只显示 INFO 及以上级别的日志
+        console_handler.setFormatter(formatter)
+        logger.addHandler(console_handler)
 
-            # RotatingFileHandler: 按文件大小轮转
-            # maxBytes: 单个日志文件的最大字节数 (例如 10MB)
-            # backupCount: 保留的旧日志文件数量
-            file_handler = RotatingFileHandler(
-                self.LOG_FILE_PATH,
-                maxBytes=10 * 1024 * 1024, # 10 MB
-                backupCount=5,
-                encoding='utf-8'
-            )
-            file_handler.setLevel(self.LOG_LEVEL) # 文件中显示所有指定级别的日志
-            file_handler.setFormatter(formatter)
-            logger.addHandler(file_handler)
+        # 5.2 文件处理器 (RotatingFileHandler 或 TimedRotatingFileHandler)
 
-            # TimedRotatingFileHandler: 按时间轮转 (例如每天轮转)
-            # when='midnight': 每天午夜轮转
-            # interval=1: 每隔1个单位轮转
-            # backupCount: 保留的旧日志文件数量 (例如保留最近7天的日志)
-            # file_handler = TimedRotatingFileHandler(
-            #     LOG_FILE_PATH,
-            #     when='midnight',
-            #     interval=1,
-            #     backupCount=7,
-            #     encoding='utf-8'
-            # )
-            # file_handler.setLevel(LOG_LEVEL)
-            # file_handler.setFormatter(formatter)
-            # logger.addHandler(file_handler)
+        # RotatingFileHandler: 按文件大小轮转
+        # maxBytes: 单个日志文件的最大字节数 (例如 10MB)
+        # backupCount: 保留的旧日志文件数量
+        file_handler = RotatingFileHandler(
+            self.LOG_FILE_PATH,
+            maxBytes=10 * 1024 * 1024, # 10 MB
+            backupCount=5,
+            encoding='utf-8'
+        )
+        file_handler.setLevel(self.LOG_LEVEL) # 文件中显示所有指定级别的日志
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+
+        # TimedRotatingFileHandler: 按时间轮转 (例如每天轮转)
+        # when='midnight': 每天午夜轮转
+        # interval=1: 每隔1个单位轮转
+        # backupCount: 保留的旧日志文件数量 (例如保留最近7天的日志)
+        # file_handler = TimedRotatingFileHandler(
+        #     LOG_FILE_PATH,
+        #     when='midnight',
+        #     interval=1,
+        #     backupCount=7,
+        #     encoding='utf-8'
+        # )
+        # file_handler.setLevel(LOG_LEVEL)
+        # file_handler.setFormatter(formatter)
+        # logger.addHandler(file_handler)
         self.logger = logger
 
 

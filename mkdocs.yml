@@ -24,3 +24,9 @@ plugins:
 
 nav:
   - Index: index.md
+  - 简易教程: tutorial.md
+  - 设计文档:
+    - LLD: LLD.md
+    - PRD: PRD.md
+  - API 文档:
+    - Core: core.md

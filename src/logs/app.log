@@ -1,0 +1,95 @@
+2025-07-10 16:11:35,807 - INFO - root - core:50 - 开始分解任务: 开发一个简单的Web应用
+2025-07-10 16:11:35,820 - DEBUG - root - core:54 - LLM提示: 
+你是一个高级任务分解助手。你的任务是将一个高层级的用户目标分解成一系列清晰、可执行的原子步骤。
+每个步骤都必须有一个唯一的ID，一个描述，以及一个可选的依赖步骤列表和可选的机器指令列表。
+请确保所有步骤形成一个有向无环图（DAG），即没有循环依赖。
+
+输出必须严格遵循以下JSON格式：
+{
+  "steps": [
+    {
+      "id": "string", // 唯一的步骤标识符，例如 "step1", "task_setup", "data_processing"
+      "description": "string", // 对该步骤的简短描述，例如 "初始化项目", "收集用户输入"
+      "dependencies": ["string"], // 可选，该步骤依赖的其他步骤的ID列表。如果无依赖，则为空列表。
+      "instructions": ["string"] // 可选，该步骤的详细机器可执行指令列表，例如命令行命令、代码片段等。
+    }
+  ]
+}
+
+请注意以下几点：
+1.  `id` 必须是字符串，且在所有步骤中唯一。
+2.  `description` 必须是字符串，简洁明了。
+3.  `dependencies` 必须是一个字符串列表，其中每个字符串都是其他步骤的 `id`。如果一个步骤没有依赖，`dependencies` 字段应为空列表 `[]`。
+4.  `instructions` 必须是一个字符串列表，包含该步骤的具体执行指令。如果无指令，则为空列表 `[]`。
+5.  确保所有 `dependencies` 中引用的 `id` 都存在于 `steps` 列表中。
+6.  分解的粒度应适中，每个步骤应是相对独立的、可完成的单元。
+7.  不要包含任何额外的文本或解释，只返回纯JSON。
+
+用户目标: "开发一个简单的Web应用"
+
+请开始分解任务并生成JSON。
+
+2025-07-10 16:11:35,820 - DEBUG - root - core:58 - LLM原始响应: 
+{
+  "steps": [
+    {
+      "id": "step1",
+      "description": "定义项目需求",
+      "dependencies": [],
+      "instructions": ["与客户沟通", "编写需求文档"]
+    },
+    {
+      "id": "step2",
+      "description": "设计数据库结构",
+      "dependencies": ["step1"],
+      "instructions": ["创建ER图", "定义表结构"]
+    },
+    {
+      "id": "step3",
+      "description": "开发后端API",
+      "dependencies": ["step2"],
+      "instructions": ["选择Web框架", "实现CRUD接口"]
+    },
+    {
+      "id": "step4",
+      "description": "开发前端界面",
+      "dependencies": ["step1"],
+      "instructions": ["选择前端框架", "设计UI/UX", "实现页面"]
+    },
+    {
+      "id": "step5",
+      "description": "集成前后端",
+      "dependencies": ["step3", "step4"],
+      "instructions": ["联调API", "部署到测试环境"]
+    },
+    {
+      "id": "step6",
+      "description": "测试与部署",
+      "dependencies": ["step5"],
+      "instructions": ["编写测试用例", "执行测试", "部署到生产环境"]
+    }
+  ]
+}
+
+2025-07-10 16:11:35,826 - INFO - root - core:110 - 任务分解成功，生成了包含 6 个节点和 6 条边的DAG。
+2025-07-11 09:47:39,546 - ERROR - ipykernel.comm - manager:46 - No such comm target registered: jupyter.widget.control
+2025-07-11 09:47:39,928 - WARNING - Comm - base_comm:246 - No such comm: 905157ee-a0c7-43b2-9ce2-9b70e4ab9f3b
+2025-07-11 09:47:39,937 - DEBUG - Comm - base_comm:249 - Current comms: []
+2025-07-11 16:46:37,905 - ERROR - ipykernel.comm - manager:46 - No such comm target registered: jupyter.widget.control
+2025-07-11 16:46:37,920 - WARNING - Comm - base_comm:246 - No such comm: 48d26468-9838-4b39-95f7-b61d9fdd2383
+2025-07-11 16:46:37,930 - DEBUG - Comm - base_comm:249 - Current comms: []
+2025-07-16 19:20:43,415 - ERROR - ipykernel.comm - manager:46 - No such comm target registered: jupyter.widget.control
+2025-07-16 19:20:43,439 - WARNING - Comm - base_comm:246 - No such comm: 5be4e4cd-d66d-47fa-8c01-af672d629e46
+2025-07-16 19:20:43,442 - DEBUG - Comm - base_comm:249 - Current comms: []
+2025-07-17 09:09:22,203 - ERROR - ipykernel.comm - manager:46 - No such comm target registered: jupyter.widget.control
+2025-07-17 09:09:22,213 - WARNING - Comm - base_comm:246 - No such comm: c6d59e3d-1396-488d-9041-32656564bb71
+2025-07-17 09:09:22,215 - DEBUG - Comm - base_comm:249 - Current comms: []
+2025-07-17 18:26:36,051 - ERROR - ipykernel.comm - manager:46 - No such comm target registered: jupyter.widget.control
+2025-07-17 18:26:36,060 - WARNING - Comm - base_comm:246 - No such comm: 06a17c2b-b35f-414d-82fb-899319c98932
+2025-07-17 18:26:36,063 - DEBUG - Comm - base_comm:249 - Current comms: []
+2025-07-18 09:32:51,542 - ERROR - ipykernel.comm - manager:46 - No such comm target registered: jupyter.widget.control
+2025-07-18 09:32:51,570 - WARNING - Comm - base_comm:246 - No such comm: 6ac1ecbe-29f6-47ac-b563-11ac0000b758
+2025-07-18 09:32:51,574 - DEBUG - Comm - base_comm:249 - Current comms: []
+2025-07-18 14:53:07,286 - ERROR - ipykernel.comm - manager:46 - No such comm target registered: jupyter.widget.control
+2025-07-18 14:53:07,296 - WARNING - Comm - base_comm:246 - No such comm: d3f985d7-7f66-46bb-b921-afcb9b3bd9e2
+2025-07-18 14:53:07,299 - DEBUG - Comm - base_comm:249 - Current comms: []

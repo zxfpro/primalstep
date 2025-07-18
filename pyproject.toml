@@ -3,8 +3,19 @@ name = "primalstep"
 version = "0.1.1"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = [ "toml==0.10.2",]
+requires-python = ">=3.9" # LLD中提到3.9
+dependencies = [
+    "toml==0.10.2",
+    "fastapi==0.111.0", # 指定版本
+    "uvicorn[standard]==0.29.0", # 指定版本
+    "click==8.1.7", # 指定版本
+    "networkx==3.2.1", # 指定版本
+    "pydantic==2.7.1", # 指定版本
+    "openai==1.30.1", # 指定版本
+]
+
+[project.scripts]
+primalstep = "primalstep.cli:cli"
 
 [tool.setuptools.package-data]
 primalstep = [ "config.yaml",]

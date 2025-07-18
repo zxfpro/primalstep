@@ -2,6 +2,12 @@ Metadata-Version: 2.4
 Name: primalstep
 Version: 0.1.1
 Summary: Add your description here
-Requires-Python: >=3.13
+Requires-Python: >=3.9
 Description-Content-Type: text/markdown
 Requires-Dist: toml==0.10.2
+Requires-Dist: fastapi==0.111.0
+Requires-Dist: uvicorn[standard]==0.29.0
+Requires-Dist: click==8.1.7
+Requires-Dist: networkx==3.2.1
+Requires-Dist: pydantic==2.7.1
+Requires-Dist: openai==1.30.1
